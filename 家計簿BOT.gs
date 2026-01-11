@@ -13,11 +13,20 @@ function doPost(e) {
   }
 
   // 2. データを変数に分ける
-  const majorCode = parts[0];
-  const minorCode = parts[1];
+  const majorCode = Number(parts[0]);
+  const minorCode = Number(parts[1]);
   const itemName  = parts[2];
-  const amount    = parts[3];
+  const amount    = Number(parts[3]);
   const remark    = parts[4] || "なし";
+
+if(isNaN(majorCode) || majorCode < 1 || majorCode > 3)
+  {return replyLine(replyToken,"１つめは１～３で入力せなあかんで！！")}
+
+if(isNaN(minorCode) || minorCode < 1 || minorCode > 17)
+  {return replyLine(replyToken,"２つめは１～１７で入力せなあかんで！！")}
+
+if(isNaN(amount))
+  {return replyLine(replyToken,"４つめは金額を数字で入れなあかんで！！")}
 
   // 3. マスタ名に変換（JavaScriptの「オブジェクト」という基本知識）
   const majorMap = {"1": "固定費", "2": "変動費", "3": "特別費"};
